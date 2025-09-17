@@ -9,4 +9,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('despachos-app');
+ 
+  toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    nav?.classList.toggle('show');
+  }
+  
 }
