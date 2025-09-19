@@ -18,10 +18,33 @@ export class DetalleDespacho {
 
   constructor(private route: ActivatedRoute, private despachos: Despachos, private router: Router, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.plan = this.despachos.planesDespacho().find(p => p.id === id) ?? null;
+ngOnInit() {
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  this.plan = this.despachos.planesDespacho().find(p => p.id === id) ?? null;
+
+  if (this.plan?.estatus === "Planificado") {
+    // Marcar chofer y camión como asignados
+    this.plan.camion.estatus = "asignado";
+    this.plan.chofer.estatus = "asignado";
+
+    // Actualizar en las señales
+    const camionesActualizados = this.despachos.camiones().map(c =>
+      c.id === this.plan!.camion.id ? this.plan!.camion : c
+    );
+    this.despachos.camiones.set(camionesActualizados);
+
+    const choferesActualizados = this.despachos.choferes().map(c =>
+      c.id === this.plan!.chofer.id ? this.plan!.chofer : c
+    );
+    this.despachos.choferes.set(choferesActualizados);
+
+    const planesActualizados = this.despachos.planesDespacho().map(p =>
+      p.id === this.plan!.id ? this.plan! : p
+    );
+    this.despachos.planesDespacho.set(planesActualizados);
   }
+}
+
 
   avanzarEstado() {
   if (!this.plan) return;

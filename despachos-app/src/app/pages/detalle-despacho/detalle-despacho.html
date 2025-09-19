@@ -38,9 +38,9 @@
     <button *ngIf="plan.estatus === 'Cargando'" (click)="avanzarEstado()">Salir a ruta</button>
     <button *ngIf="plan.estatus === 'En Ruta'" (click)="avanzarEstado()">Completar despacho</button>
     </div><div class='editar'>
-    <button class="btn-modificar" (click)="modificar()">Modificar</button>
+    <button class="btn-modificar" (click)="modificar()" *ngIf="plan?.estatus === 'Planificado'">Modificar</button>
     
-    <button class="btn-inactivar" (click)="inactivar()">Inactivar</button>
+    <button class="btn-inactivar" (click)="inactivar()">Desactivar</button>
   </div></div>
 </div>
 

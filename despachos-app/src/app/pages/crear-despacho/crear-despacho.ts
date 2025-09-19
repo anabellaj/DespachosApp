@@ -28,6 +28,8 @@ export class CrearDespacho {
 
   despachoExistente: PlanDeDespacho | null = null;
 
+  
+
   constructor(
     private despachos: Despachos,
     private router: Router,
@@ -72,6 +74,8 @@ export class CrearDespacho {
       return;
     }
 
+    
+
 if (this.despachoExistente) {
   const actualizado = new PlanDeDespacho(
     this.despachoExistente.id,
@@ -80,6 +84,7 @@ if (this.despachoExistente) {
     this.choferSeleccionado!,
     this.pedidosSeleccionados
   );
+  
 
   // Mantener el estatus que tenía el plan
   actualizado.estatus = this.despachoExistente.estatus;

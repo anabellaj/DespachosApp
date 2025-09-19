@@ -7,11 +7,41 @@
   {
     "id": 2,
     "placa": "XYZ-789",
-    "estatus": "en ruta"
+    "estatus": "disponible"
   },
   {
     "id": 3,
     "placa": "JKL-456",
+    "estatus": "mantenimiento"
+  },
+  {
+    "id": 4,
+    "placa": "MNO-321",
+    "estatus": "disponible"
+  },
+  {
+    "id": 5,
+    "placa": "PQR-654",
+    "estatus": "en ruta"
+  },
+  {
+    "id": 6,
+    "placa": "STU-987",
+    "estatus": "mantenimiento"
+  },
+  {
+    "id": 7,
+    "placa": "VWX-159",
+    "estatus": "disponible"
+  },
+  {
+    "id": 8,
+    "placa": "YZA-753",
+    "estatus": "en ruta"
+  },
+  {
+    "id": 9,
+    "placa": "BCD-258",
     "estatus": "mantenimiento"
   }
 ]
