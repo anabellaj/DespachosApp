@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombreTienda": "Farmatodo La Castellana",
+    "numeroItems": 30,
+    "destino": "Av. Principal de La Castellana, Caracas"
+  },
+  {
+    "id": 2,
+    "nombreTienda": "Farmatodo Altamira",
+    "numeroItems": 15,
+    "destino": "Av. Luis Roche, Altamira, Caracas"
+  },
+  {
+    "id": 3,
+    "nombreTienda": "Farmatodo Las Mercedes",
+    "numeroItems": 45,
+    "destino": "Calle París, Las Mercedes, Caracas"
+  },
+  {
+    "id": 4,
+    "nombreTienda": "Farmatodo El Rosal",
+    "numeroItems": 20,
+    "destino": "Av. Francisco de Miranda, El Rosal, Caracas"
+  },
+  {
+    "id": 5,
+    "nombreTienda": "Farmatodo Chacaíto",
+    "numeroItems": 12,
+    "destino": "Boulevard de Sabana Grande, Chacaíto, Caracas"
+  }
+]

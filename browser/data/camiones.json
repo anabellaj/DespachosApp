@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "placa": "ABC-123",
+    "estatus": "disponible"
+  },
+  {
+    "id": 2,
+    "placa": "XYZ-789",
+    "estatus": "en ruta"
+  },
+  {
+    "id": 3,
+    "placa": "JKL-456",
+    "estatus": "mantenimiento"
+  }
+]
