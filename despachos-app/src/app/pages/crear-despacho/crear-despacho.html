@@ -1,0 +1,52 @@
+<div class="crear-despacho">
+  <h2>Crear Nuevo Plan de Despacho</h2>
+
+  <!-- Nombre de la ruta -->
+  <input type="text" [(ngModel)]="nombreRuta" placeholder="Nombre de la ruta" />
+
+  <!-- Selección de pedidos -->
+  <h3>Selecciona los pedidos a incluir</h3>
+  <div *ngFor="let pedido of pedidos" class="pedidos-item">
+    <input type="checkbox" 
+           (change)="togglePedido(pedido, $event.target.checked)" 
+           [checked]="pedidosSeleccionados.includes(pedido)" />
+    {{ pedido.nombreTienda }} ({{ pedido.numeroItems }} ítems)
+  </div>
+
+  <!-- Dropdowns de camión y chofer -->
+  <div class="dropdowns">
+    <div *ngIf="camiones && camiones.length > 0; else noCamiones">
+      <h4>Selecciona el camión</h4>
+      <select [(ngModel)]="camionSeleccionado">
+        <option [ngValue]="null" disabled selected>Selecciona un camión</option>
+        <option *ngFor="let camion of camiones" 
+                [ngValue]="camion" 
+                [disabled]="camion.estatus !== 'disponible'">
+          {{ camion.placa }} - {{ camion.estatus }}
+        </option>
+      </select>
+    </div>
+    <ng-template #noCamiones>
+         <h4>No hay camiones disponibles</h4>
+    </ng-template>
+
+    <div *ngIf="choferes && choferes.length > 0; else noChoferes">
+      <h4>Selecciona el chofer</h4>
+      <select [(ngModel)]="choferSeleccionado">
+        <option [ngValue]="null" disabled selected>Selecciona un chofer</option>
+        <option *ngFor="let chofer of choferes" 
+                [ngValue]="chofer" 
+                [disabled]="chofer.estatus !== 'disponible'">
+          {{ chofer.nombre }} - {{ chofer.estatus }}
+        </option>
+      </select>
+    </div>
+
+     <ng-template #noChoferes>
+         <h4>No hay choferes disponibles</h4>
+    </ng-template>
+  </div>
+
+  <!-- Botón de guardar -->
+  <button (click)="guardarDespacho()">Guardar Despacho</button>
+</div>

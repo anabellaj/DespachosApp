@@ -1,0 +1,38 @@
+<div class="detalle-despacho" *ngIf="plan" [ngClass]="plan.estatus.toLowerCase()">
+    <div class='etiqueta'><span class="estado">{{ plan.estatus }}</span></div>
+  <h2>Detalle del Despacho - {{ plan.nombreRuta }}</h2>
+    <p class='id'><strong>ID:</strong> {{ plan.id }}</p>
+  
+  <div class="info">
+    
+    <div class='info-main'><div>
+    <h4>Datos del Camión</h4>
+    <p><strong>ID:</strong> {{ plan.camion.id }}</p>
+    <p><strong>Placa:</strong> {{ plan.camion.placa }}</p>
+    <p class='status'><strong>Estatus:</strong> {{ plan.camion.estatus }}</p></div>
+    <div>
+    <h4>Datos del Chofer</h4>
+    <p><strong>ID:</strong> {{ plan.chofer.id }}</p>
+    <p><strong>Nombre:</strong> {{ plan.chofer.nombre }}</p>
+    <p class='status'><strong>Estatus:</strong> {{ plan.chofer.estatus }}</p></div></div>
+    <div class='divider'></div>
+    <div class='info-pedidos'>
+    <h4>Pedidos</h4>
+    <p><strong>Pedidos:</strong> {{ plan.pedidos.length }}</p></div>
+
+</div>
+
+  <div class="acciones">
+    <div class='estado-btns'>
+    <button *ngIf="plan.estatus === 'Planificado'" (click)="avanzarEstado()">Iniciar carga</button>
+    <button *ngIf="plan.estatus === 'Cargando'" (click)="avanzarEstado()">Salir a ruta</button>
+    <button *ngIf="plan.estatus === 'En Ruta'" (click)="avanzarEstado()">Completar despacho</button>
+    </div><div>
+    <!-- <button class="btn-modificar" (click)="modificar()">Modificar</button> -->
+    <button class="btn-inactivar" (click)="inactivar()">Inactivar</button>
+  </div></div>
+</div>
+
+<div *ngIf="!plan">
+  <p>No se encontró el plan de despacho.</p>
+</div>

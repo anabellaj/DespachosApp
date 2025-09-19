@@ -5,7 +5,7 @@ import { Pedido } from "./pedido";
 export class PlanDeDespacho {
 
     // El estatus inicial siempre es 'Planificado'
-    public estatus: 'Planificado' | 'Cargando' | 'En Ruta' | 'Completado' = 'Planificado';
+    public estatus: 'Planificado' | 'Cargando' | 'En Ruta' | 'Completado' | 'Inactivo' = 'Planificado';
 
     /**
      * Metodo constructor de la clase PlanDeDespacho

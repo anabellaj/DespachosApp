@@ -1,0 +1,155 @@
+.dashboard {
+  padding: 20px;
+  min-height: calc(100vh - 140px)
+}
+
+h1 {
+  color: #02144d;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.btn-crear {
+  background-color: #003466;
+  color: white;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 16px 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: none;
+}
+
+.btn-crear:hover {
+  background-color: #02144d;
+}
+
+.lista-planes{
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px
+}
+
+
+.tarjeta-plan  {
+  background: #f4f6f9;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  padding: 1em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+border: 3px solid transparent;
+
+}
+
+.acciones{
+    display: flex;
+    justify-content: space-between;
+}
+
+.buscador{
+    font-size: 14px;
+    background-color: #f4f6f9;
+    border: none;
+    border-radius: 10px;
+    height:fit-content;
+    padding: 16px 20px;
+    min-width: 300px;
+    width:25%
+}
+
+.no-planes{
+    color: #02144d;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 50px;
+}
+
+.nombre-ruta{
+    text-align: center
+}
+
+.btn-detalles {
+  background: #02144d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+  width: 100%
+}
+
+.btn-detalles:hover {
+  background: #031c66;
+}
+
+.tarjeta-actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px ;
+    align-items: flex-start;
+}
+
+.chofer{
+    margin-bottom: 15px
+}
+
+/* Badge de estado */
+.estado {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #fff;
+    text-align: center
+}
+
+/* Colores dinámicos */
+.planificado {
+  border-color: purple !important;
+}
+.planificado .estado {
+  background: purple;
+}
+
+.en.ruta {
+  border-color: lightblue;
+}
+.en.ruta .estado {
+  background: lightblue;
+}
+
+.cargando {
+  border-color: yellow;
+}
+.cargando .estado {
+  background: yellow;
+}
+
+.completado {
+  border-color: green;
+}
+.completado .estado {
+  background: green;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .acciones {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buscador {
+    width: auto;
+  }
+
+  .lista-planes{
+    grid-template-columns: 1fr  ;
+    gap: 10px;
+}
+}

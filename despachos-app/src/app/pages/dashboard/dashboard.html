@@ -1,0 +1,45 @@
+<div class="dashboard">
+  <h1>Dashboard de Despachos</h1>
+
+  <div class="acciones">
+  <!-- Buscador -->
+  <input 
+    type="text" 
+    placeholder="Buscar plan de despacho..." 
+    class="buscador"
+    [(ngModel)]="terminoBusqueda"
+  />
+  <!-- Botón Crear -->
+  <button class="btn-crear" (click)="crearNuevoDespacho()">
+    Crear Nuevo Despacho
+  </button>
+</div>
+
+  <!-- Lista de planes -->
+    <div class="lista-planes" *ngIf="planesDespachoFiltrados.length > 0; else sinPlanes">
+    <ng-container *ngFor="let plan of planesDespachoFiltrados">
+    <div  *ngIf="plan.estatus.toLowerCase() !== 'inactivo'"  [ngClass]="plan.estatus.toLowerCase()" class="tarjeta-plan">
+        <div class="tarjeta-id">
+        <div class="id">ID - {{ plan.id }}</div>
+        </div>
+        <div class="tarjeta-title">
+        <h2 class="nombre-ruta">{{ plan.nombreRuta }}</h2>
+        </div>
+
+        <div class="tarjeta-actions">
+        <span class="estado">{{ plan.estatus }}</span>
+        <span>Numero de pedidos: {{plan.pedidos.length}}</span>
+        <span>Placa del camión: {{plan.camion.placa}}</span>
+        <span class='chofer'>Chofer: {{plan.chofer.nombre}}</span>
+
+        <button class="btn-detalles" [routerLink]="['/detalle-despacho', plan.id]">Ver Detalles</button>
+        </div>
+    </div>
+    </ng-container>
+    </div>
+
+  <!-- Si no hay planes -->
+  <ng-template #sinPlanes>
+    <p class="no-planes">No hay planes de despacho creados aún.</p>
+  </ng-template>
+</div>

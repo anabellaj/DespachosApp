@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carlos Vives",
+    "estatus": "disponible"
+  },
+  {
+    "id": 2,
+    "nombre": "Camila Martínez",
+    "estatus": "asignado"
+  },
+  {
+    "id": 3,
+    "nombre": "Ana Gómez",
+    "estatus": "disponible"
+  }
+]
