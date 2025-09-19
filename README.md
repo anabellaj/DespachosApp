@@ -74,10 +74,6 @@ dist/DespachosApp/
 
 ## 📌 Notas
 
-* Los datos de camiones y choferes provienen de un .json dentro del repositorio, que puede ser editado con facilicad y sus cambios serán reflejados en el sistema.
+* Los datos de camiones y choferes provienen de un .json dentro del repositorio, que puede ser editado con facilidad y sus cambios serán reflejados en el sistema.
 
 ---
-
-```
-```
-
