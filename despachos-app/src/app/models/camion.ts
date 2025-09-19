@@ -9,13 +9,20 @@ export class Camion {
     constructor(
         public id: number,
         public placa: string,
-        public estatus: 'disponible' | 'en ruta' | 'en mantenimiento'
+        public estatus: 'disponible' | 'asignado' | 'en ruta' | 'en mantenimiento'
     ) {}
 
     /**
      * Metodo para asignar el camion a una ruta, cambiando su estatus a 'en ruta'
      */
     asignar (){
+        this.estatus = 'asignado';
+    }
+
+    /**
+     * Metodo para asignar el camion a una ruta, cambiando su estatus a 'en ruta'
+     */
+    enrutar (){
         this.estatus = 'en ruta';
     }
 

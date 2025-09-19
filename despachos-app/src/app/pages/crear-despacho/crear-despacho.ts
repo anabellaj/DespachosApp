@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Despachos } from '../../services/despachos';
 import { PlanDeDespacho } from '../../models/planDeDespacho';
@@ -26,67 +26,83 @@ export class CrearDespacho {
   camionSeleccionado: Camion | null = null;
   choferSeleccionado: Chofer | null = null;
 
-  constructor(private despachos: Despachos, private router: Router) {}
+  despachoExistente: PlanDeDespacho | null = null;
 
-ngOnInit() {
+  constructor(
+    private despachos: Despachos,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+  // cargar data
   this.despachos.getPedidos().subscribe(p => this.pedidos = p);
-
   this.despachos.getCamiones().subscribe(() => {
     this.camiones = this.despachos.camiones().filter(c => c.estatus === 'disponible');
   });
-
   this.despachos.getChoferes().subscribe(() => {
     this.choferes = this.despachos.choferes().filter(c => c.estatus === 'disponible');
   });
-}
 
-
-  togglePedido(pedido: Pedido, checked: boolean) {
-  const instancia = new Pedido(pedido.id, pedido.nombreTienda, pedido.numeroItems, pedido.destino);
-
-  if (checked) {
-    this.pedidosSeleccionados.push(instancia);
-  } else {
-    this.pedidosSeleccionados = this.pedidosSeleccionados.filter(p => p.id !== pedido.id);
+  // 🚀 leer id de la URL
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  if (id) {
+    const encontrado = this.despachos.planesDespacho().find(p => p.id === id);
+    if (encontrado) {
+      this.despachoExistente = encontrado;
+      this.nombreRuta = encontrado.nombreRuta;
+      this.camionSeleccionado = encontrado.camion;
+      this.choferSeleccionado = encontrado.chofer;
+      this.pedidosSeleccionados = [...encontrado.pedidos];
+    }
   }
 }
+
+  togglePedido(pedido: Pedido, checked: boolean) {
+    if (checked) {
+      this.pedidosSeleccionados.push(pedido);
+    } else {
+      this.pedidosSeleccionados = this.pedidosSeleccionados.filter(p => p.id !== pedido.id);
+    }
+  }
 
   guardarDespacho() {
     if (!this.nombreRuta || !this.camionSeleccionado || !this.choferSeleccionado) {
       alert('Todos los campos son obligatorios');
       return;
     }
-  const pedidos = this.pedidos.filter(p => this.pedidosSeleccionados.includes(p));
-  const camion = this.camionSeleccionado; // ya es instancia de Camion
-  const chofer = this.choferSeleccionado; // ya es instancia de Chofer
 
-  // Cambiamos su estado
-  camion.asignar();
-  const camionesActualizados = this.despachos.camiones().map(c =>
-      c.id === camion.id ? camion : c
-    );
-this.despachos.camiones.set(camionesActualizados);
+if (this.despachoExistente) {
+  const actualizado = new PlanDeDespacho(
+    this.despachoExistente.id,
+    this.nombreRuta,
+    this.camionSeleccionado!,
+    this.choferSeleccionado!,
+    this.pedidosSeleccionados
+  );
 
-  chofer.asignar();
-  const choferesActualizados = this.despachos.choferes().map(c =>
-      c.id === chofer.id ? chofer : c
-    );
-this.despachos.choferes.set(choferesActualizados);
+  // Mantener el estatus que tenía el plan
+  actualizado.estatus = this.despachoExistente.estatus;
+
+  const planes = this.despachos.planesDespacho().map(p =>
+    p.id === actualizado.id ? actualizado : p
+  );
+  this.despachos.planesDespacho.set(planes);
+
+  alert('Despacho modificado exitosamente!');
+} else {
+  const nuevoPlan = new PlanDeDespacho(
+    Date.now(),
+    this.nombreRuta,
+    this.camionSeleccionado!,
+    this.choferSeleccionado!,
+    this.pedidosSeleccionados
+  );
+  this.despachos.agregarDespacho(nuevoPlan);
+  alert('Despacho creado exitosamente!');
+}
 
 
-    // Crear plan de despacho usando objetos de clase
-    const nuevoPlan = new PlanDeDespacho(
-      Date.now(),
-      this.nombreRuta,
-      this.camionSeleccionado,
-      this.choferSeleccionado,
-      this.pedidosSeleccionados
-    );
-
-    // Guardar en el service
-    this.despachos.agregarDespacho(nuevoPlan);
-
-    alert('Despacho creado exitosamente!');
     this.router.navigate(['/']); // redirige al dashboard
   }
 }

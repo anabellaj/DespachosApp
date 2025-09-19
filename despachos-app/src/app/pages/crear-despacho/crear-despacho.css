@@ -1,3 +1,8 @@
+.parent-cont{
+  margin:20px;
+  min-height: calc(100vh - 140px)
+}
+
 .crear-despacho {
   max-width: 700px;
   margin: 40px auto; /* Centra el formulario vertical y horizontal */

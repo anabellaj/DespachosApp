@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Despachos } from '../../services/despachos';
 import { PlanDeDespacho } from '../../models/planDeDespacho';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-detalle-despacho',
@@ -14,7 +16,7 @@ import { PlanDeDespacho } from '../../models/planDeDespacho';
 export class DetalleDespacho {
   plan: PlanDeDespacho | null = null;
 
-  constructor(private route: ActivatedRoute, private despachos: Despachos, private router: Router) {}
+  constructor(private route: ActivatedRoute, private despachos: Despachos, private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -22,22 +24,49 @@ export class DetalleDespacho {
   }
 
   avanzarEstado() {
-    if (!this.plan) return;
+  if (!this.plan) return;
 
-    switch (this.plan.estatus.toLowerCase()) {
-      case 'planificado':
-        this.plan.estatus = 'Cargando';
-        break;
-      case 'cargando':
-        this.plan.estatus = 'En Ruta';
-        break;
-      case 'en ruta':
-        this.plan.estatus = 'Completado';
-        break;
-    }
+  const plan = this.plan;
 
-    this.actualizarPlan();
+  switch (plan.estatus.toLowerCase()) {
+    case 'planificado':
+      plan.iniciarCarga();
+      plan.camion.asignar();
+      plan.chofer.asignar();
+      break;
+
+    case 'cargando':
+      plan.salirARuta();
+      plan.camion.enrutar();
+      break;
+
+    case 'en ruta':
+      plan.completar();
+      break;
   }
+
+  // Actualizar camión en la señal
+  const camionesActualizados = this.despachos.camiones().map(c =>
+    c.id === plan.camion.id ? plan.camion : c
+  );
+  this.despachos.camiones.set(camionesActualizados);
+
+  // Actualizar chofer en la señal
+  const choferesActualizados = this.despachos.choferes().map(c =>
+    c.id === plan.chofer.id ? plan.chofer : c
+  );
+  this.despachos.choferes.set(choferesActualizados);
+
+  // Actualizar el plan en la señal
+  const planesActualizados = this.despachos.planesDespacho().map(p =>
+    p.id === plan.id ? plan : p
+  );
+
+  this.despachos.planesDespacho.set(planesActualizados);
+
+  // this.plan = {...plan,};
+  
+}
 
   inactivar() {
     if (this.plan) {
@@ -47,10 +76,11 @@ export class DetalleDespacho {
   }
 
   modificar() {
-    if (this.plan) {
-      this.router.navigate(['/crear-despacho'], { state: { despacho: this.plan } });
-    }
+  if (this.plan) {
+    this.router.navigate(['/crear-despacho', this.plan.id]);
   }
+}
+
 
   private actualizarPlan() {
     const actualizados = this.despachos.planesDespacho().map(p =>

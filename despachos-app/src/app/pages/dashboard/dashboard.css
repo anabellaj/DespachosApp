@@ -123,10 +123,10 @@ border: 3px solid transparent;
 }
 
 .cargando {
-  border-color: yellow;
+  border-color: #FFB343;
 }
 .cargando .estado {
-  background: yellow;
+  background: #FFB343;
 }
 
 .completado {

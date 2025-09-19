@@ -1,3 +1,4 @@
+<div class='parent-cont'>
 <div class="detalle-despacho" *ngIf="plan" [ngClass]="plan.estatus.toLowerCase()">
     <div class='etiqueta'><span class="estado">{{ plan.estatus }}</span></div>
   <h2>Detalle del Despacho - {{ plan.nombreRuta }}</h2>
@@ -18,7 +19,16 @@
     <div class='divider'></div>
     <div class='info-pedidos'>
     <h4>Pedidos</h4>
-    <p><strong>Pedidos:</strong> {{ plan.pedidos.length }}</p></div>
+    <div *ngFor="let pedido of plan.pedidos" class="pedido-item">
+        <p><strong>ID:</strong> {{ pedido.id }}</p>
+        <p><strong>Tienda:</strong> {{ pedido.nombreTienda }}</p>
+        <p><strong>Items:</strong> {{ pedido.numeroItems }}</p>
+        <p><strong>Destino:</strong> {{ pedido.destino }}</p>
+        <hr />
+
+  </div>
+  <p class='total'><strong>Total:</strong> {{ plan.pedidos.length }}</p>
+</div>
 
 </div>
 
@@ -27,12 +37,15 @@
     <button *ngIf="plan.estatus === 'Planificado'" (click)="avanzarEstado()">Iniciar carga</button>
     <button *ngIf="plan.estatus === 'Cargando'" (click)="avanzarEstado()">Salir a ruta</button>
     <button *ngIf="plan.estatus === 'En Ruta'" (click)="avanzarEstado()">Completar despacho</button>
-    </div><div>
-    <!-- <button class="btn-modificar" (click)="modificar()">Modificar</button> -->
+    </div><div class='editar'>
+    <button class="btn-modificar" (click)="modificar()">Modificar</button>
+    
     <button class="btn-inactivar" (click)="inactivar()">Inactivar</button>
   </div></div>
 </div>
 
 <div *ngIf="!plan">
   <p>No se encontró el plan de despacho.</p>
+</div>
+
 </div>

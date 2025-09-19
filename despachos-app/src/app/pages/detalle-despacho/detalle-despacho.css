@@ -1,3 +1,19 @@
+.parent-cont{
+  margin:20px;
+  min-height: calc(100vh - 140px)
+
+}
+
+hr{
+  margin-top: 20px;
+  margin-bottom:20px
+}
+
+.total{
+  font-size:20px;
+
+}
+
 .detalle-despacho {
   max-width: 700px;
   margin: 30px auto;
@@ -26,6 +42,19 @@
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.editar{
+  display: flex;
+  flex-direction: row;
+  gap: 10px
+}
+
+.estado-btns button{
+  width:200px
 }
 
 .detalle-despacho .acciones button {
@@ -36,6 +65,7 @@
   font-weight: bold;
   transition: background 0.2s;
   color: white;
+  
 }
 
 /* Botones según acción */
@@ -43,11 +73,13 @@
 .detalle-despacho .acciones button:nth-child(2), /* Salir a ruta */
 .detalle-despacho .acciones button:nth-child(3)  /* Completar despacho */
 {
-  background-color: #003466; /* morado para acciones de flujo */
+  background-color: #003466; 
 }
 
 .detalle-despacho .acciones button.btn-modificar {
-  background-color: #003466; /* azul oscuro */
+  background-color: transparent; 
+  border: solid 2px #003466;
+  color: #003466
 }
 
 .detalle-despacho .acciones button.btn-inactivar {
@@ -99,7 +131,7 @@
   background: lightblue;
 }
 .cargando .estado {
-  background: yellow;
+  background: #FFB343 ;
 }
 .completado .estado {
   background: green;
@@ -115,6 +147,8 @@
 
 .info-pedidos{
   padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 15px
 }
 
 /* Responsive */
@@ -123,7 +157,9 @@
     padding: 15px;
   }
 
-  .detalle-despacho .acciones {
+  .info-main {
     flex-direction: column;
+    padding-left:10%;
+    margin-bottom:10px;
   }
 }

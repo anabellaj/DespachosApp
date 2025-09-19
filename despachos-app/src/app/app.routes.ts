@@ -7,5 +7,7 @@ import { DetalleDespacho } from './pages/detalle-despacho/detalle-despacho';
 export const routes: Routes = [
     { path: '', component: Dashboard },
     { path: 'crear-despacho', component: CrearDespacho },
-    { path: 'detalle-despacho/:id', component: DetalleDespacho }
+    { path: 'detalle-despacho/:id', component: DetalleDespacho },     
+    { path: 'crear-despacho/:id', component: CrearDespacho }
+
 ];

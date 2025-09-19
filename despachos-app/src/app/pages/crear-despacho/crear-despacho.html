@@ -1,5 +1,6 @@
+<div class='parent-cont'>
 <div class="crear-despacho">
-  <h2>Crear Nuevo Plan de Despacho</h2>
+  <h2>{{ despachoExistente ? 'Modificar Plan de Despacho' : 'Crear Nuevo Plan de Despacho' }}</h2>
 
   <!-- Nombre de la ruta -->
   <input type="text" [(ngModel)]="nombreRuta" placeholder="Nombre de la ruta" />
@@ -48,5 +49,8 @@
   </div>
 
   <!-- Botón de guardar -->
-  <button (click)="guardarDespacho()">Guardar Despacho</button>
+<button (click)="guardarDespacho()">
+  {{ despachoExistente ? 'Guardar Cambios' : 'Crear Plan de Despacho' }}
+</button>
+</div>
 </div>
