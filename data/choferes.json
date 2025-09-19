@@ -13,5 +13,35 @@
     "id": 3,
     "nombre": "Ana Gómez",
     "estatus": "disponible"
+  },
+  {
+    "id": 4,
+    "nombre": "Luis Fernández",
+    "estatus": "disponible"
+  },
+  {
+    "id": 5,
+    "nombre": "María Torres",
+    "estatus": "disponible"
+  },
+  {
+    "id": 6,
+    "nombre": "José Ramírez",
+    "estatus": "disponible"
+  },
+  {
+    "id": 7,
+    "nombre": "Patricia Rivas",
+    "estatus": "disponible"
+  },
+  {
+    "id": 8,
+    "nombre": "Diego Salazar",
+    "estatus": "disponible"
+  },
+  {
+    "id": 9,
+    "nombre": "Valentina López",
+    "estatus": "disponible"
   }
 ]
